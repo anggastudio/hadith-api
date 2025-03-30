@@ -12,8 +12,10 @@ export const {
   NODE_ENV
 } = process.env as Env
 
-export const Browser = (headless = true) => Puppeteer.launch({
-  headless,
-  ignoreHTTPSErrors: true,
-  args: ['--no-sandbox', '--disable-setuid-sandbox']
-})
+export const Browser = (headless = true) =>
+	Puppeteer.launch({
+		headless: headless ? "chrome" : false,
+		ignoreHTTPSErrors: true,
+		args: ["--no-sandbox", "--disable-setuid-sandbox"],
+		timeout: 60000, // Increase timeout to 60 seconds
+	});
