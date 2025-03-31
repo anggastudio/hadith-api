@@ -5,13 +5,10 @@ WORKDIR /app
 # Copy package files first
 COPY package.json ./
 
-# Install dependencies
-RUN npm install
+# Install production dependencies only
+RUN npm ci --only=production
 
-# Copy the books directory specifically
-COPY books/ ./books/
-
-# Copy the rest of the application
+# Copy the entire application including books
 COPY . .
 
 # Set environment variables

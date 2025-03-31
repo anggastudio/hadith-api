@@ -6,10 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3300:3300"    # Use the same port externally as internally
+      - "3300:3300"
     environment:
       - NODE_ENV=production
       - PORT=3300
-    volumes:
-      - ./books:/app/books:ro
     restart: unless-stopped
