@@ -27,11 +27,34 @@ const allHadiths = readdirSync(basePath).reduce((acc, hadith) => {
 
 class HadithModel {
   public available(): Hadith[] {
-    return Object.entries(allHadiths).map(([haditsName, data]) => ({
-      name: `HR. ${this.beautyName(haditsName)}`,
-      id: haditsName,
-      available: data.length
-    }))
+    try {
+			// Check if allHadiths is empty or undefined
+			if (!allHadiths || Object.keys(allHadiths).length === 0) {
+				console.error("No hadith books found. Check the books directory.");
+				// Try to list the books directory contents
+				const fs = require("fs");
+				const path = require("path");
+				const booksDir = path.join(__dirname, "../../books");
+
+				if (fs.existsSync(booksDir)) {
+					console.log(
+						"Books directory exists. Contents:",
+						fs.readdirSync(booksDir)
+					);
+				} else {
+					console.log("Books directory does not exist at:", booksDir);
+				}
+			}
+
+			return Object.entries(allHadiths || {}).map(([haditsName, data]) => ({
+				name: `HR. ${this.beautyName(haditsName)}`,
+				id: haditsName,
+				available: data.length,
+			}));
+		} catch (error) {
+			console.error("Error in available():", error);
+			return [];
+		}
   }
 
   public getByName(haditsName: string): HadithContent[] {
