@@ -5,8 +5,9 @@ WORKDIR /app
 # Copy package files first
 COPY package.json ./
 
-# Install production dependencies only
-RUN npm ci --only=production
+# Install both production dependencies and type definitions
+RUN npm install --production \
+    && npm install --save-dev typescript ts-node @types/node @types/express @types/cors
 
 # Copy the entire application including books
 COPY . .
