@@ -5,14 +5,14 @@ WORKDIR /app
 # Copy package files first
 COPY package.json ./
 
-# Install dependencies (excluding crawler dependencies for production)
+# Install dependencies
 RUN npm install
+
+# Copy the books directory specifically
+COPY books/ ./books/
 
 # Copy the rest of the application
 COPY . .
-
-# Create books directory if it doesn't exist
-RUN mkdir -p ./books
 
 # Set environment variables
 ENV NODE_ENV=production
