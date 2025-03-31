@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  hadith-api:
+    build: .
+    ports:
+      - "3300:3300"
+    environment:
+      - NODE_ENV=production
+      - PORT=3300
+      - BASEURL=https://hadits.id
+    volumes:
+      - ./books:/app/books
+      - ./:/app
+      - /app/node_modules
+    restart: unless-stopped
+    command: npm run dev
