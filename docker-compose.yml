@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:3300"    # Map container port 3300 to host port 80
+      - "3300:3300"    # Changed from 80:3300 to avoid port conflict
     environment:
       - NODE_ENV=production
       - PORT=3300    # Keep internal port as 3300
