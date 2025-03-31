@@ -6,7 +6,7 @@ class HomeHandler extends Handler {
   public index(req: Request, res: Response): void {
 		try {
 			res.status(200).send({
-				maintaner: "Angga <angga@anggastudio.dev>",
+				maintaner: "Angga <angga@anggastudio.com>",
 				source: "https://github.com/anggastudio/hadith-api",
 				endpoints: {
 					list: {
